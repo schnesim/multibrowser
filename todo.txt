@@ -1,0 +1,4 @@
+- make the number of visible websites configurable
+- add profiles
+- next and back buttons
+- remove open in external browser
