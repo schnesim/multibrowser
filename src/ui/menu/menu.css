@@ -1,0 +1,16 @@
+.menu-highlight {
+    background-color: rgb(50.3%, 50.3%, 50.3%);
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-closed {
+    width: 0.9em;
+}
+
+.menu-open {
+    width: 30em;
+}
