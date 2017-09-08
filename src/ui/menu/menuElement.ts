@@ -2,10 +2,16 @@ import { MenuItemContainer } from './menuItemContainer';
 import { MenuToggle } from './menuToggle';
 
 export class MenuElement {
+
+    private _domNode: HTMLDivElement;
+
     private _menuVisible: boolean;
-    private _domNode: HTMLElement;
     private _menuToggle: MenuToggle;
     private _menuItemsContainer: MenuItemContainer;
+    private _urls: HTMLTextAreaElement;
+    private _btnAddProfile: HTMLButtonElement;
+    
+    
     constructor() {
         this._domNode = document.createElement('div');
         this._domNode.id = 'menuElement';
@@ -15,8 +21,14 @@ export class MenuElement {
         this._domNode.addEventListener('mouseleave', this.unhighlightClosedMenu.bind(this));
 
         this._menuToggle = new MenuToggle();
-
         this._menuItemsContainer = new MenuItemContainer();
+
+        
+
+        this._urls = document.createElement('textarea');
+        this._urls.classList.add('urls');
+        this._urls.value = 'some text\r\nmoretext'
+        this._menuItemsContainer.getDomNode().appendChild(this._urls);
         
         this._domNode.appendChild(this._menuToggle.getDomNode());
         this._domNode.appendChild(this._menuItemsContainer.getDomNode());
@@ -45,7 +57,7 @@ export class MenuElement {
     private toggleMenu(e) {
         if (this._menuVisible && e.srcElement.id === this._menuToggle.getDomNode().id) {
             this.closeMenu();
-        } else {
+        } else if (!this._menuVisible) {
             this.openMenu();
         }
     }
@@ -56,7 +68,6 @@ export class MenuElement {
         this._domNode.classList.remove('menu-highlight');
         this._menuToggle.toggle();
         this._menuItemsContainer.show();
-        // this._menuItemsContainer.toggle();
         this._menuVisible = true;
     }
 
@@ -65,7 +76,6 @@ export class MenuElement {
         this._domNode.classList.remove('menu-open');
         this._menuToggle.toggle();
         this._menuItemsContainer.hide();
-        // this._menuItemsContainer.toggle();
         this._menuVisible = false;
     }
 }

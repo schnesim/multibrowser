@@ -8,3 +8,26 @@
 .menu-items-container-show {
     visibility: visible;
 }
+
+.profile-group {
+    width: 90%;
+    height: 4em;
+    margin-left: 0.7em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.btn-add {
+    border: solid 1px black;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    font-size: large;
+    width: 28px;
+    height: 28px;
+    background-color: white;
+}
+
+.btn-add:hover {
+    background-color: lightgray;
+}

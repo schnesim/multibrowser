@@ -20,4 +20,12 @@ export class MenuToggle {
         this._arrow.classList.toggle('arrow-down')
         this._arrow.classList.toggle('arrow-down2')
     }
+
+    /**
+     * 
+     * @param {HTMLElement} childElement 
+     */
+    public appendChild(childElement) {
+        this._domNode.appendChild(childElement);
+    }
 }
