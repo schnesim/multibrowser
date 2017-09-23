@@ -8,7 +8,7 @@ export class MenuElement {
     private _menuVisible: boolean;
     private _menuToggle: MenuToggle;
     private _menuItemsContainer: MenuItemContainer;
-    private _urls: HTMLTextAreaElement;
+    
     private _btnAddProfile: HTMLButtonElement;
     
     
@@ -28,7 +28,7 @@ export class MenuElement {
         this._urls = document.createElement('textarea');
         this._urls.classList.add('urls');
         this._urls.value = 'some text\r\nmoretext'
-        this._menuItemsContainer.getDomNode().appendChild(this._urls);
+        // this._menuItemsContainer.getDomNode().appendChild(this._urls);
         
         this._domNode.appendChild(this._menuToggle.getDomNode());
         this._domNode.appendChild(this._menuItemsContainer.getDomNode());
