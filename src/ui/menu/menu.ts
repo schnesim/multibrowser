@@ -1,14 +1,12 @@
-import { MenuItemContainer } from './menuItemContainer';
+import { MenuContainer } from './menuContainer';
 import { MenuToggle } from './menuToggle';
 
-export class MenuElement {
+export class Menu {
 
     private _domNode: HTMLDivElement;
-
     private _menuVisible: boolean;
     private _menuToggle: MenuToggle;
-    private _menuItemsContainer: MenuItemContainer;
-    
+    private _menuItemsContainer: MenuContainer;
     private _btnAddProfile: HTMLButtonElement;
     
     
@@ -19,16 +17,9 @@ export class MenuElement {
         this._domNode.addEventListener('click', this.toggleMenu.bind(this));
         this._domNode.addEventListener('mouseenter', this.highlightClosedMenu.bind(this));
         this._domNode.addEventListener('mouseleave', this.unhighlightClosedMenu.bind(this));
-
-        this._menuToggle = new MenuToggle();
-        this._menuItemsContainer = new MenuItemContainer();
-
         
-
-        this._urls = document.createElement('textarea');
-        this._urls.classList.add('urls');
-        this._urls.value = 'some text\r\nmoretext'
-        // this._menuItemsContainer.getDomNode().appendChild(this._urls);
+        this._menuToggle = new MenuToggle();
+        this._menuItemsContainer = new MenuContainer();
         
         this._domNode.appendChild(this._menuToggle.getDomNode());
         this._domNode.appendChild(this._menuItemsContainer.getDomNode());

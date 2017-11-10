@@ -35,6 +35,10 @@
     height: 1em;
 }
 
+.arrow-container:hover {
+    background-color: rgb(50.3%, 50.3%, 50.3%);
+}
+
 .arrow-down2 {
     float: right;
 }

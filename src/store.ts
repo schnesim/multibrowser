@@ -15,6 +15,10 @@ export class Store {
   public get(key): any {
     return this.data[key];
   }
+
+  public getAll(): object {
+    return this.data;
+  }
   
   // ...and this will set it
   public set(key, val): void {

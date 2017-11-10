@@ -1,6 +1,8 @@
 import { ComboBox } from '../elements/combobox';
+import { Store } from '../../store';
+import { Profile } from './profile';
 
-export class MenuItemContainer {
+export class MenuContainer {
 
     private _domNode: HTMLDivElement;
     private _comboBox: ComboBox;
@@ -13,6 +15,8 @@ export class MenuItemContainer {
     private _urls: HTMLTextAreaElement;
     private _btnAdd: HTMLButtonElement;
     private _btnRemove: HTMLButtonElement;
+    private _profiles: Array<Profile>;
+    private _store: Store;
 
     constructor() {
         this._domNode = document.createElement('div');
@@ -36,17 +40,19 @@ export class MenuItemContainer {
 
         this._urls = document.createElement('textarea');
         this._urls.classList.add('urls');
-        this._urls.value = 'some text\r\nmoretext'
+        this._urls.value = 'some text\nmoretext'
         this._rowUrls.appendChild(this._urls);
 
         this._btnAdd = document.createElement('button');
         this._btnAdd.innerText = '+';
         this._btnAdd.className = 'btn-add';
+        this._btnAdd.addEventListener('click', this.addNewProfile.bind(this));
         this._btnRemove = document.createElement('button');
         this._btnRemove.innerText = '-';
         this._btnRemove.className = 'btn-add';
 
         this._comboBox = new ComboBox();
+        this._comboBox.callback = this.dropdownCallback.bind(this);
         this._comboContainer = document.createElement('div');
         this._comboContainer.appendChild(this._comboBox.getDomNode());
         this._comboContainer.appendChild(this._btnAdd);
@@ -56,8 +62,33 @@ export class MenuItemContainer {
         this._profileName = document.createElement('input');
         this._profileNameContainer = document.createElement('div');
         this._profileNameContainer.appendChild(this._profileName);
-        
+
         this._rowProfileName.appendChild(this._profileName);
+
+        this._store = new Store({ configName: 'profiles', defaults: {} });
+        this._profiles = [];
+        this.readProfiles();
+    }
+
+    private readProfiles() {
+        const data = this._store.getAll();
+        for (let profile in data) {
+            this._comboBox.addEntry(profile);
+            this._profiles.push(new Profile(profile, data[profile].urls));
+        }
+    }
+
+    private addNewProfile(e: MouseEvent) {
+        const urls = this._urls.value.split(',');
+        console.log(urls);
+        const profile = new Profile(this._profileName.value, urls);
+        this._profiles.push(profile);
+        this._store.set(profile.name, profile);
+        this._comboBox.addEntry(profile.name);
+    }
+
+    private dropdownCallback(index: number) {
+        this._profileName.value = this._profiles[index].name;
     }
 
     public show() {
